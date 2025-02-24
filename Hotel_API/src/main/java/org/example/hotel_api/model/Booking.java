@@ -2,11 +2,16 @@ package org.example.hotel_api.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import lombok.*;
 
 import java.time.LocalDate;
 
 @Entity
-
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 public class Booking {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,8 +24,4 @@ public class Booking {
     private PaymentStatus paymentStatus;
     @ManyToOne
     private Hotel hotel;
-    @Transient
-    @JsonIgnore
-    private User user;
-
 }

@@ -9,6 +9,7 @@ public class Hotel {
     @Id
 
     private String id;
+    @Column(unique=true)
     private String name;
     private String location;
     @OneToMany

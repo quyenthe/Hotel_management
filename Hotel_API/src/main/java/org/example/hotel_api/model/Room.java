@@ -5,8 +5,7 @@ import jakarta.persistence.*;
 @Entity
 public class Room {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private String id;
     private String roomType;
     private int roomNumber;
     private int roomPrice;
@@ -14,11 +13,11 @@ public class Room {
     @ManyToOne
     private Hotel hotel;
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
