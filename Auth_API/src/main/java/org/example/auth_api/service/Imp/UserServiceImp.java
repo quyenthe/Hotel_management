@@ -1,5 +1,6 @@
 package org.example.auth_api.service.Imp;
 
+import org.example.auth_api.Enum.RoleType;
 import org.example.auth_api.Exception.UserExistedException;
 import org.example.auth_api.model.Role;
 import org.example.auth_api.model.Users;
@@ -16,6 +17,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -45,7 +47,7 @@ public class UserServiceImp implements UserService {
 
         Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginDTO.getUsername(), loginDTO.getPassword()));
         if(authentication.isAuthenticated()) {
-            return jwtTokenService.generateToken(loginDTO.getUsername());
+            return jwtTokenService.generateToken(users);
         }
         else {
             return "Error generating token";
@@ -63,13 +65,13 @@ public class UserServiceImp implements UserService {
         }
         Role role;
 
-        Optional<Role> roleOptional = roleRepository.findByRoleType("USER");
+        Optional<Role> roleOptional = roleRepository.findByRoleType(userDTO.getRole().getRoleType());
         if (roleOptional.isPresent()) {
             role = roleOptional.get();
 
         } else {
             role = new Role();
-            role.setRoleType("USER");
+            role.setRoleType(userDTO.getRole().getRoleType());
             roleRepository.save(role);
         }
 
@@ -82,4 +84,8 @@ public class UserServiceImp implements UserService {
         return true;
     }
 
+    @Override
+    public List<Users> getAllUsers() {
+        return userRepository.findAll();
+    }
 }

@@ -1,14 +1,18 @@
 package org.example.auth_api.controller;
 
+import org.example.auth_api.model.Users;
 import org.example.auth_api.model.dto.LoginDTO;
 import org.example.auth_api.model.dto.UserDTO;
 import org.example.auth_api.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/auth")
@@ -34,4 +38,9 @@ public class AuthController {
 
     }
 
+    @PostMapping("/get")
+    public ResponseEntity<?> getUser() {
+        List<Users> users=userService.getAllUsers();
+        return ResponseEntity.ok(users);
+    }
 }

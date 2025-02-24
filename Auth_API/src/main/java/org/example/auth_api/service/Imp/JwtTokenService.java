@@ -1,27 +1,35 @@
 package org.example.auth_api.service.Imp;
 
+import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
+import org.example.auth_api.model.Users;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import javax.crypto.SecretKey;
 import java.nio.charset.StandardCharsets;
 import java.security.Key;
-import java.util.Date;
-import java.util.HashMap;
+import java.util.*;
 
 @Service
 public class JwtTokenService {
-    String secretkey="";
-    public String generateToken(String username) {
+    String secretkey="ThisIsAVeryLongSecretKeyForJWTToken12345";
+    public String generateToken(Users users) {
+        Map<String, Object> claims = new HashMap<>();
+        List<String> roles=new ArrayList<>();
+
+        roles.add(users.getRole().getRoleType());
+        claims.put("roles", roles);
         String token= Jwts.builder()
-                .claims()
-                .add(new HashMap<>())
-                .subject(username)
+
+                .claims(claims)
+
+                .subject(users.getUsername())
                 .issuedAt(new Date(System.currentTimeMillis()))
                 .expiration(new Date(System.currentTimeMillis()+60*60*1000))
-                .and()
+
+                .signWith(createKey())
                 .compact();
         return token;
     }
