@@ -3,6 +3,7 @@ package org.example.hotel_api.model;
 import jakarta.persistence.*;
 
 @Entity
+@Table(name = "room")
 public class Room {
     @Id
     private String id;
@@ -11,6 +12,7 @@ public class Room {
     private int roomPrice;
     private Status status;
     @ManyToOne
+    @JoinColumn(name="hotel_id")
     private Hotel hotel;
 
     public String getId() {

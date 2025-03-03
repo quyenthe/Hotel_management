@@ -1,9 +1,5 @@
-server:
-  port: 8080
 
 spring:
-  application:
-    name: Hotel_API
 
   datasource:
     url: jdbc:postgresql://localhost:5432/test
@@ -16,8 +12,5 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: update
     show-sql: true
-
-
-

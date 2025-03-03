@@ -1,20 +1,26 @@
 package org.example.hotel_api.model;
 
 import jakarta.persistence.*;
+import lombok.*;
 
 import java.util.List;
 
 @Entity
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
+@Table(name = "hotel")
 public class Hotel {
     @Id
-
     private String id;
     @Column(unique=true)
     private String name;
     private String location;
-    @OneToMany
+    @OneToMany(mappedBy = "hotel", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Room> rooms;
-    @OneToMany
+    @OneToMany(mappedBy = "hotel", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Booking> booking;
 
     public String getId() {

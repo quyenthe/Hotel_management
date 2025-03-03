@@ -7,6 +7,7 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="Discovery" />
         <module name="Booking_API" />
         <module name="APIGateway" />
       </profile>
@@ -22,12 +23,17 @@
         <module name="Hotel_API" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="Book_API" target="17" />
+    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="APIGateway" options="-parameters" />
       <module name="Auth_API" options="-parameters" />
+      <module name="Book_API" options="-parameters" />
       <module name="Booking_API" options="-parameters" />
+      <module name="Discovery" options="-parameters" />
       <module name="Hotel_API" options="-parameters" />
     </option>
   </component>

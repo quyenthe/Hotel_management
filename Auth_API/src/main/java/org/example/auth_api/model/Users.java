@@ -1,6 +1,8 @@
 package org.example.auth_api.model;
 
 import jakarta.persistence.*;
+import lombok.NonNull;
+import org.antlr.v4.runtime.misc.NotNull;
 
 
 @Entity
@@ -16,6 +18,9 @@ public class Users {
     @Column(nullable = false)
     private String password;
 
+    private String phoneNumber;
+
+    private String email;
     @ManyToOne
     @JoinColumn(name = "role", nullable = false) // Khóa ngoại tham chiếu đến Role
     private Role role;
