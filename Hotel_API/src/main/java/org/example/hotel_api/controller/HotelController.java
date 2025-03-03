@@ -28,4 +28,12 @@ public class HotelController {
     ResponseEntity<?> deleteHotel(@RequestParam String hotelId) {
         return ResponseEntity.ok(hotelService.deleteHotelById(hotelId));
     }
+    @GetMapping("/getHotelByLocation/{location}")
+    ResponseEntity<?> getHotelByLocation(@PathVariable String location) {
+        return ResponseEntity.ok(hotelService.getHotelByLocation(location));
+    }
+    @GetMapping("/getHotelByName/{name}")
+    ResponseEntity<?> getHotelByName(@PathVariable String name) {
+        return ResponseEntity.ok(hotelService.getHotelByName(name));
+    }
 }

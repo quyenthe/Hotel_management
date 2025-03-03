@@ -28,7 +28,7 @@ public class BookingServiceImp implements BookingService {
     @Autowired
     private RoomRepository roomRepository;
     @Override
-    public String bookRoom(String hotelId, String userId,Booking booking){
+    public String bookRoom(String hotelId, int userId,Booking booking){
         Hotel hotel=hotelRepository.findById(hotelId).orElseThrow(()->new NotFoundHotelException("Hotel not found"));
         Room room=roomRepository.findById(booking.getRoomId()).orElseThrow(()->new NotFoundRoomException("Room not found"));
         if(Status.Booked.equals(room.getStatus())){
@@ -41,7 +41,7 @@ public class BookingServiceImp implements BookingService {
 
     }
     @Override
-    public Booking getBookingById(int bookingId){
+    public Booking getBookingById(String bookingId){
         Optional<Booking> booking=bookingRepository.findById(bookingId);
         if(!booking.isPresent()){
             throw new NotFoundBookingException("Booking not found");
@@ -53,11 +53,11 @@ public class BookingServiceImp implements BookingService {
         return bookingRepository.findAll();
     }
     @Override
-    public String cancelBooking(int bookingId){
+    public String cancelBooking(String bookingId){
         Booking booking=getBookingById(bookingId);
         Room room=roomRepository.findById(booking.getRoomId()).orElseThrow(()->new NotFoundRoomException("Room not found"));
         if(Status.Booked.equals(room.getStatus())){
-            room.setStatus(Status.Booked);
+            room.setStatus(Status.Available);
             roomRepository.save(room);
         }
         bookingRepository.delete(booking);

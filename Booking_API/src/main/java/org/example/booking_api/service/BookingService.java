@@ -6,11 +6,11 @@ import org.example.booking_api.model.Hotel;
 import java.util.List;
 
 public interface BookingService {
-    public Booking bookRoom(int userId, int hotelId);
+    public Booking bookRoom(int userId, String hotelId);
 
     public String cancelBooking(String bookingId);
 
-    public List<Booking> getAllBookings(String userId);
+    public List<Booking> getAllBookings(int userId);
 
     public Booking getBookingById(String bookingId);
     public List<Booking> getAllBookingsByHotelId(String hotelId);
@@ -21,5 +21,5 @@ public interface BookingService {
 
     public List<Hotel> availableHotels(String hotelId);
 
-    public Booking completeBooking(String bookingId);
+
 }
